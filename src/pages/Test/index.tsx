@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { getCloudList } from '@/apis/test';
+import { useRequest } from '@umijs/max';
 
 interface DataType {
   key: string;
@@ -30,44 +31,46 @@ const columns: ColumnsType<DataType> = [
   },
 ]
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
+// const data: DataType[] = [
+//   {
+//     key: '1',
+//     name: 'John Brown',
+//     age: 32,
+//     address: 'New York No. 1 Lake Park',
+//     tags: ['nice', 'developer'],
+//   },
+//   {
+//     key: '2',
+//     name: 'Jim Green',
+//     age: 42,
+//     address: 'London No. 1 Lake Park',
+//     tags: ['loser'],
+//   },
+//   {
+//     key: '3',
+//     name: 'Joe Black',
+//     age: 32,
+//     address: 'Sydney No. 1 Lake Park',
+//     tags: ['cool', 'teacher'],
+//   },
+// ];
 
 const TestPage: React.FC = () => {
   // const [list, setList] = useState([])
 
-  useEffect(() => {
-    const getList = async () => {
-      const res = await getCloudList({})
-      console.log(res);
-    }
-    getList()
-  }, [])
+  // useEffect(() => {
+  //   const getList = async () => {
+  //     const res = await getCloudList({})
+  //     console.log(res);
+  //   }
+  //   getList()
+  // }, [])
+
+  const { data, loading } = useRequest(() => getCloudList({}))
 
   return (
     <>
-      <Table columns={columns} dataSource={data} />;
+      <Table loading={loading} columns={columns} dataSource={(data as any).results} rowKey='objectId' />;
     </>
   );
 };

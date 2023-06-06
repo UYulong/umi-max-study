@@ -7,7 +7,9 @@ export default defineConfig({
   access: {},
   model: {},
   initialState: {},
-  request: {},
+  request: {
+    dataField: ''
+  },
   layout: {
     locale: false,
     ...defaultSettings
