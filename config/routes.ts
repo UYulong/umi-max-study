@@ -39,4 +39,20 @@ export default [
       },
     ],
   },
+  {
+    path: '/banner',
+    name: '轮播图',
+    routes: [
+      // { 
+      //   path: '/category/list',
+      //   name: '分类列表',
+      //   component: '../src/pages/Category/list/index.tsx',
+      // },
+      { 
+        path: '/banner/publish',
+        name: '轮播列表',
+        component: './Banner/publish/index.tsx',
+      },
+    ],
+  },
 ]

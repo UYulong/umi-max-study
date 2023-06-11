@@ -14,7 +14,8 @@
     "@ant-design/icons": "^5.1.4",
     "@ant-design/pro-components": "^2.5.5",
     "@umijs/max": "^4.0.70",
-    "antd": "^5.5.2"
+    "antd": "^5.5.2",
+    "leancloud-storage": "^4.15.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.8",
