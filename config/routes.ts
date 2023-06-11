@@ -23,4 +23,20 @@ export default [
     path: '/table',
     component: './Table',
   },
+  {
+    path: '/category',
+    name: '分类管理',
+    routes: [
+      // { 
+      //   path: '/category/list',
+      //   name: '分类列表',
+      //   component: '../src/pages/Category/list/index.tsx',
+      // },
+      { 
+        path: '/category/publish',
+        name: '分类列表',
+        component: './Category/publish/index.tsx',
+      },
+    ],
+  },
 ]

@@ -68,9 +68,12 @@ const TestPage: React.FC = () => {
 
   const { data, loading } = useRequest(() => getCloudList({}))
 
+  console.log(data);
+
+
   return (
     <>
-      <Table loading={loading} columns={columns} dataSource={(data as any).results} rowKey='objectId' />;
+      <Table loading={loading} columns={columns} dataSource={data ? (data as any).results : []} rowKey='objectId' />
     </>
   );
 };

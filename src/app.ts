@@ -1,5 +1,6 @@
 /* 运行时配置 */
 import type { RequestConfig } from '@umijs/max';
+import { message } from 'antd'
 
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化
 // 更多信息见文档：https://umijs.org/docs/api/runtime-config#getinitialstate
@@ -29,7 +30,7 @@ export const request: RequestConfig = {
   },
 
   requestInterceptors: [
-    (config:any) => {
+    (config: any) => {
       config.url = 'https://bh3oaub5.lc-cn-n1-shared.com/1.1' + config.url
       config.headers = {
         'X-LC-Id': 'bH3oAUB5fJoXNzyv0aJyNL5a-gzGzoHsz',
@@ -39,9 +40,13 @@ export const request: RequestConfig = {
       return { ...config }
     }
   ],
+
   responseInterceptors: [
     (response: any) => {
-      // const { data = {} as any, config } = response;
+      const { status } = response;
+      if (status === 201) {
+        message.success('操作成功')
+      }
       return response
     },
   ]
