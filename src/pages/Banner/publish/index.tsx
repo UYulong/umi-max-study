@@ -1,22 +1,38 @@
 import React from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import { useRequest } from '@umijs/max'
 import ImgUpload from '@/components/ImgUpload'
 
-import { addCakeCategory } from '@/apis/category'
+import { addBanner } from '@/apis/banner';
 
 const BannerPublish: React.FC = () => {
-  const { run } = useRequest((v) => addCakeCategory(v), { manual: true })
+  const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage()
+  const { run } = useRequest((v) => addBanner(v), { manual: true })
+
+  const resetForm = () => {
+    form.resetFields()
+  }
 
   const onFinish = async (values: any) => {
-    const { status } = await run(values)
-    console.log(status);
+    const { objectId } = await run(values)
+    if (objectId) {
+      messageApi.open({
+        type: 'success',
+        content: '保存成功！',
+      });
+      resetForm()
+    }
   };
+
+
 
   return (
     <>
+      {contextHolder}
       <Form
         name="basic"
+        form={form}
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 600 }}
@@ -25,7 +41,7 @@ const BannerPublish: React.FC = () => {
       >
         <Form.Item
           label="活动名称"
-          name="category"
+          name="name"
           rules={[{ required: true, message: '请输入活动名称！' }]}
         >
           <Input />
@@ -33,7 +49,7 @@ const BannerPublish: React.FC = () => {
 
         <Form.Item
           label="活动链接"
-          name="category"
+          name="link"
           rules={[{ required: true, message: '请输入活动链接！' }]}
         >
           <Input />
@@ -41,7 +57,7 @@ const BannerPublish: React.FC = () => {
 
         <Form.Item
           label="封面图片"
-          name="category"
+          name="imgUrl"
           rules={[{ required: true, message: '请上传封面图片！' }]}
         >
           <ImgUpload />

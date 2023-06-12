@@ -22,7 +22,7 @@ const beforeUpload = (file: RcFile) => {
   return isJpgOrPng && isLt2M;
 };
 
-const ImgUpload: React.FC = () => {
+const ImgUpload: React.FC = (props: any) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
 
@@ -37,12 +37,12 @@ const ImgUpload: React.FC = () => {
   // 自定义图片上传方法
   const handleCustomRequest = (info: any) => {
     setLoading(true);
-
     getBase64(info.file as RcFile, (base64) => {
       setLoading(false);
       const file = new Cloud.File('testImg.png', { base64 })
       file.save().then((res: any) => {
         setImageUrl(res.attributes.url);
+        props.onChange(res.attributes.url)
       })
     });
   }

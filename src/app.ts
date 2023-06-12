@@ -1,6 +1,5 @@
 /* 运行时配置 */
 import type { RequestConfig } from '@umijs/max';
-import { message } from 'antd';
 import '@/utils/init-lean-clound';
 
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化
@@ -44,10 +43,6 @@ export const request: RequestConfig = {
 
   responseInterceptors: [
     (response: any) => {
-      const { status } = response;
-      if (status === 201) {
-        message.success('操作成功')
-      }
       return response
     },
   ]
