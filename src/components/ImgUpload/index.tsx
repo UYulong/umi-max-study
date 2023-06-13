@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import type { RcFile } from 'antd/es/upload/interface';
@@ -25,6 +25,15 @@ const beforeUpload = (file: RcFile) => {
 const ImgUpload: React.FC = (props: any) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
+  
+  const { value } = props
+
+  useEffect(() => {
+    if (value) {
+      setImageUrl(value)
+    }
+  }, [value])
+
 
   // 上传中占位
   const uploadButton = (
