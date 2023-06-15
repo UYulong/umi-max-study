@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Button, Form, Input, message } from 'antd';
-import { useRequest } from '@umijs/max'
+import { useRequest, history } from '@umijs/max'
 import ImgUpload from '@/components/ImgUpload'
 
 import { getBanner, saveBanner } from '@/apis/banner';
@@ -42,6 +42,7 @@ const BannerEdit: React.FC = () => {
         content: '保存成功！',
       });
       resetForm()
+      history.go(-1)
     }
   };
 
