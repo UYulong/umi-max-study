@@ -16,6 +16,10 @@ const GoodsPublish: React.FC = () => {
   }
 
   const onFinish = async (values: any) => {
+    console.log(values);
+
+    return
+    
     const { objectId } = await run(values)
     if (objectId) {
       messageApi.open({

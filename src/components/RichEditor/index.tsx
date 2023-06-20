@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Editor, Toolbar } from '@wangeditor/editor-for-react'
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
 
-const RichEditor: React.FC = () => {
+const RichEditor: React.FC = (props: any) => {
   // editor 实例
   const [editor, setEditor] = useState<IDomEditor | null>(null)   // TS 语法
 
@@ -24,6 +24,9 @@ const RichEditor: React.FC = () => {
   // 编辑器配置
   const editorConfig: Partial<IEditorConfig> = {    // TS 语法
     placeholder: '请输入内容...',
+    onBlur: (editor: IDomEditor) => {
+      props.onChange(editor.getHtml())
+    }
   }
 
   // 及时销毁 editor ，重要！
