@@ -24,12 +24,14 @@ const Login: React.FC = () => {
     if (res.sessionToken) {
       localStorage.setItem('userInfo', JSON.stringify(res))
       setInitialState({
-        ...res
+        userInfo: {
+          ...res
+        }
       })
 
       setTimeout(() => {
         history.push('/')
-      }, 200)
+      }, 1000)
     }
   };
 

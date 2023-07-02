@@ -2,30 +2,49 @@
 import { history } from '@umijs/max'
 import type { RequestConfig } from '@umijs/max';
 import type { RunTimeLayoutConfig } from '@umijs/max';
+import type { Settings as LayoutSettings } from '@ant-design/pro-components';
+import defaultSettings from '../config/defaultSettings';
+import { AvatarDropdown } from '@/components';
+
 import '@/utils/init-lean-clound';
 
 interface InitState {
-  [key: string]: string
+  settings?: Partial<LayoutSettings>;
+  userInfo: any
 }
 
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化
 // 更多信息见文档：https://umijs.org/docs/api/runtime-config#getinitialstate
 export async function getInitialState(): Promise<InitState> {
-  return JSON.parse(localStorage.getItem('userInfo')!) || {}
+  return {
+    userInfo: JSON.parse(localStorage.getItem('userInfo')!) || {},
+    settings: defaultSettings as Partial<LayoutSettings>,
+  }
 };
 
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
+  console.log({ ...initialState?.settings });
+
   return {
-    logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
+    // layout: 'mix',
     menu: {
       locale: false,
     },
+    avatarProps: {
+      src: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
+      title: '444',
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      render: (_, _avatarChildren) => {
+        return <AvatarDropdown />;
+      },
+    },
     onPageChange: () => {
-      const { sessionToken } = initialState!
+      const { sessionToken } = initialState?.userInfo
       if (!sessionToken) {
         history.push('/login')
       }
-    }
+    },
+    ...initialState?.settings,
   };
 };
 
