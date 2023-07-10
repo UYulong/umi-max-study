@@ -90,4 +90,21 @@ export default [
       },
     ],
   },
+  {
+    path: '/dva',
+    name: 'DVA',
+    icon: 'PieChartOutlined',
+    routes: [
+      {
+        path: '/dva/data',
+        name: 'DVA数据展示',
+        component: './Dva/data.tsx',
+      },
+      {
+        path: '/dva/dataOp',
+        name: 'DVA操作',
+        component: './Dva/operation.tsx',
+      },
+    ],
+  },
 ]

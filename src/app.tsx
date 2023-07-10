@@ -23,10 +23,8 @@ export async function getInitialState(): Promise<InitState> {
 };
 
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
-  console.log({ ...initialState?.settings });
-
   return {
-    // layout: 'mix',
+    layout: 'mix',
     menu: {
       locale: false,
     },
